@@ -1,51 +1,86 @@
 import random
 import time
 
+def main():
+    choice = choose()
+    if choice == 1:
+        print(tossCoin())
+        time.sleep(3)
+        main()
+    elif choice == 2:
+        tosses = 0
+
+        try:
+            tosses = int(input("How many times do you want to toss a coin?: "))
+            multiToss(tosses)
+            time.sleep(3)
+            main()
+        except Exception:
+            print("Invalid choice!")
+            time.sleep(3)
+            main()
+
+    elif choice == 3:
+        try:
+            limit1 = int(input("What should the minimum number be?: "))
+            limit2 = int(input("What should the maximum number be?: "))
+            print(random.randint(limit1, limit2))
+            time.sleep(3)
+            main()
+        except Exception:
+            print("Invalid choice!")
+            time.sleep(3)
+            main()
+
+    else:
+        print(f'No such option "{choice}".')
+        time.sleep(3)
+        main()
+
+
 def choose():
-    options = ["Flip a Coin", "Calculator"]
-    for i, option in enumerate(options):
-        print(f'{i + 1}: {option} ')
-    choice=input("Choose an option >>  ")
-    return int(choice)
+    print("""Options: 
+    [1]: coinflip
+    [2]: multiple coinflips
+    [3]: random number
+    """)
+
+    try:
+        choice=input("Choose an option >>  ")
+        return int(choice)
+    except Exception:
+        return str(choice)
         
 
 def tossCoin():
-    choice = ["Heads", "Tails"]
-    return choice[random.randint(0,1)]
+    choices = ["Heads", "Tails"]
+    return random.choice(choices)
 
 def multiToss(arg1):
     count = 0
-    outcome = []
+    outcomes = []
     while count < arg1:
         toss = tossCoin()
-        print("Flipping...")
         time.sleep(1)
         print(toss)
         count += 1
-        outcome.append(toss)
-    print(f"----------------")
-    print(f'Heads has occured: {outcome.count("Heads")}\n\nTails has occured: {outcome.count("Tails")}\n')
+        outcomes.append(toss)
+    print(f'Heads has occured: {outcomes.count("Heads")} times\nTails has occured: {outcomes.count("Tails")} times\n')
     
 if __name__ == "__main__":
 
-    def tossit():  
-        i = int(input("How times toss a coin? >>  "))
-        if i == 1:
-            time.sleep(1)
-            print("Flipping...")
-            print(tossCoin())
-        elif i == 0:
-            print(f'Exitting because the given value was "{i}"...')
-            exit
-        else:
-            multiToss(i)
+    #def tossit():  
+    #    i = int(input("How times toss a coin? >>  "))
+    #    if i == 1:
+    #        time.sleep(1)
+    #        print("Flipping...")
+    #        print(tossCoin())
+    #    elif i == 0:
+    #        print(f'Exitting because the given value was "{i}"...')
+    #        exit
+    #    else:
+    #        multiToss(i)
             
             
-    choice = choose()
-    if choice == 1:
-        tossit()
-    elif choice == 2:
-        print("WIP")
-    else:
-        print(f'No such option "{choice}".')
+    main()
         
