@@ -1,5 +1,5 @@
 # Deissson's tools script
 
 ```
-curl -sSL https://github.com/Deissson/tools | python3
+curl -sSL https://raw.githubusercontent.com/Deissson/tools/master/main.py | python3
 ```
