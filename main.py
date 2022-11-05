@@ -1,10 +1,11 @@
 import random
 import time
+import datetime as datetime
 import webbrowser as brw
 
 
 def choose():
-    options = ["Flip a Coin", "Time Calculator", "Search"]
+    options = ["Flip a Coin", "Search"]
     availArgs=[]
     for i, option in enumerate(options):
         print(f'{i + 1}: {option} ')
@@ -32,18 +33,6 @@ def multiToss(arg1):
         outcome.append(toss)
     print(f"----------------")
     print(f'Heads has occured: {outcome.count("Heads")}\n\nTails has occured: {outcome.count("Tails")}\n')
-    
-def calculateTime():
-    inputTime = input("Type time you want to [Press Enter to use your current time ] >>  ")
-    if len(inputTime) < 1:
-        current_time = time.strftime("%H:%M", time.localtime())
-        addTimeM = input(f"How much minutes to add for {current_time} >>  ")
-        addTimeH = input(f"How much hours to add for {current_time} >>  ")
-        if len(addTimeM or addTimeH) < 1:
-            print('Skipping...') 
-    else:
-        addTimeM = input(f"How much minutes to add for {inputTime} >>  ")
-        addTimeH = input(f"How much hours to add for {inputTime} >>  ")
 
 def google():
     i=input("Enter your query >>  ")
@@ -79,9 +68,6 @@ if __name__ == "__main__":
     if choice == 1:
         tossit()
     elif choice == 2:
-        calculateTime()
-    elif choice == 3:
         google()
     else:
-        #print(f'No such option "{choice}".')
         exit

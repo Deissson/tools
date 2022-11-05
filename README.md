@@ -1,5 +1,9 @@
 # Deissson's tools script
 
+Dependencies:
++ python
++ curl
+
 ```
-curl -sSL https://raw.githubusercontent.com/Deissson/tools/master/main.py | python3
+python3 <(curl -sSL https://raw.githubusercontent.com/Deissson/tools/master/main.py)  
 ```
