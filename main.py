@@ -11,28 +11,34 @@ class tools:
         # Generating a list with options
         for i, option in enumerate(options):
             print(f'{i + 1}: {option} ')
-        choice=input("Choose an option >>  ")
-        return int(choice)
+        while True:
+            try:
+                choice=input("Choose an option >>  ")
+                return int(choice)
+            except Exception:
+                print("\nOnly regular numbers are allowed!\n")
             
 
-    def tossCoin(): # Returns Heads/Tails
-        
+    def tossCoin(arg1=None): # Returns Heads/Tails
         #Available options
         choice = ["Heads", "Tails"]
-        return choice[random.randint(0,1)]
-    
-    def tossOnce(): # Used for tossing a coin once
-        i = int(input("How times toss a coin? >>  "))
-        if i == 1:
-            print("Flipping...")
-            time.sleep(1)
-            print(tools.tossCoin())
-        elif i < 1:
-            print(f'Exitting because the given value was "{i}"...')
-            exit
+        if arg1 == "tossOnce":
+            try:
+                i = int(input("How many times toss a coin? >>  "))
+                if i == 1:
+                    print("Flipping...")
+                    time.sleep(1)
+                    print(tools.tossCoin())
+                elif i < 1:
+                    print(f'Exitting because the given value was "{i}"...')
+                    exit
+                else:
+                    tools.multiToss(i)
+            except Exception:
+                print("\nOnly regular numbers are allowed!\n")
         else:
-            tools.multiToss(i)
-        # TODO: combine tossCoin and tossOnce
+            return choice[random.randint(0,1)]
+        
 
     def multiToss(arg1): # Tosses a coin multiple times, heavily based on tossCoin
         count = 0
@@ -56,10 +62,12 @@ class tools:
         if i.startswith(("!g", "!google")):
             iG = i.replace('!google', '', 1).replace('!g', '', 1)
             brw.open_new_tab(f'https://www.google.com/search?hl=en&q={iG}')
+            
         # Search using Yandex
         elif i.startswith(("!ya", "!y", "!yandex")):
             iY = i.replace("!yandex", '', 1).replace("!ya", '', 1).replace("!y", '', 1)
             brw.open_new_tab(f"https://yandex.com/search/?text={iY}")
+            
         # Search using DuckDuckGo (Default)
         else:
             iD = i.replace('?', '%3F&')
@@ -68,7 +76,7 @@ class tools:
     def __init__(self) -> None: 
         choice = tools.choose()
         if choice == 1:
-            tools.tossOnce()
+            tools.tossCoin("tossOnce")
         elif choice == 2:
             tools.search()
         else:
@@ -76,25 +84,4 @@ class tools:
             exit
             
 if __name__ == "__main__":
-    # def tossit():  
-    #     i = int(input("How times toss a coin? >>  "))
-    #     if i == 1:
-    #         print("Flipping...")
-    #         time.sleep(1)
-    #         print(tools.tossCoin())
-    #     elif i < 1:
-    #         print(f'Exitting because the given value was "{i}"...')
-    #         exit
-    #     else:
-    #         tools.multiToss(i)
-            
-            
-    # choice = tools.choose()
-    # if choice == 1:
-    #     tossit()
-    # elif choice == 2:
-    #     tools.google()
-    # else:
-    #     exit
-    
     tools()
