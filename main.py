@@ -1,8 +1,10 @@
 import random
 import time
+import webbrowser as brw
+
 
 def choose():
-    options = ["Flip a Coin", "Time Calculator"]
+    options = ["Flip a Coin", "Time Calculator", "Search"]
     availArgs=[]
     for i, option in enumerate(options):
         print(f'{i + 1}: {option} ')
@@ -43,6 +45,21 @@ def calculateTime():
         addTimeM = input(f"How much minutes to add for {inputTime} >>  ")
         addTimeH = input(f"How much hours to add for {inputTime} >>  ")
 
+def google():
+    i=input("Enter your query >>  ")
+
+    if i.startswith(("!g", "!google")):
+        iG = i.replace('!google', '', 1).replace('!g', '', 1)
+        brw.open_new_tab(f'https://www.google.com/search?hl=en&q={iG}')
+
+    elif i.startswith(("!ya", "!y", "!yandex")):
+        iY = i.replace("!yandex", '', 1).replace("!ya", '', 1).replace("!y", '', 1)
+        brw.open_new_tab(f"https://yandex.com/search/?text={iY}")
+
+    else:
+        iD = i.replace('?', '%3F&')
+        brw.open_new_tab(f"https://duckduckgo.com/?q={iD}")
+        
 if __name__ == "__main__":
 
     def tossit():  
@@ -63,6 +80,8 @@ if __name__ == "__main__":
         tossit()
     elif choice == 2:
         calculateTime()
+    elif choice == 3:
+        google()
     else:
         #print(f'No such option "{choice}".')
         exit
